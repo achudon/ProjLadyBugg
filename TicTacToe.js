@@ -4,12 +4,48 @@ var winCombos = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9
 
 var squaresPlayed = [9];
 
-window.onload = initializeAll(); 
+var square;
 
-alert('got here!');
-function initializeAll {
+window.onload = function initializeAll() {
 	winCombos = new Array();
 	squaresPlayed = new Array();
-	console.log("hello");
+
+	for (var i = 0; i < 9; i++) {
+		squaresPlayed[i] = "Z"; // this means that there is no real value there
+	}
 }
+
+
+function canvasClicked(canvasNum) {
+	var toPaint = "canvas"+canvasNum;
+	console.log(canvasNum);
+	if (turn % 2 === 0) {
+		square = squaresPlayed[canvasNum - 1];
+		if (square === "Z") {
+			squaresPlayed[canvasNum - 1] = "X";
+		} 
+	} else {
+		console.log("o");
+	}
+	turn++;
+}
+
+function updateSquaresPlayed(isXTurn) {
+	square = squaresPlayed[canvasNum - 1];
+
+	if (square === "Z") {
+		if(isXTurn) {
+			squaresPlayed[canvasNum - 1] = "X";
+			paintX(canvasNum);
+		} else {
+			squaresPlayed[canvasNum - 1] = "O";
+			paintO(canvasNum);
+		}	
+	} 
+	
+}
+
+function checkWin() {
+
+} 
 
