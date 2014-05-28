@@ -18,6 +18,16 @@ window.onload = function initializeAll() {
 	winCombos = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
 	squaresPlayed = new Array();
 
+	xSymbol = new Image();
+	xSymbol.src = "Alyssa.jpg";
+	xSymbol.width = 50;
+	xSymbol.height = 50;
+	ySymbol = new Image();
+	ySymbol.src = "Phteven.jpg";
+	ySymbol.width = 50;
+	ySymbol.height = 50;
+
+
 	for (var i = 0; i < 9; i++) {
 		squaresPlayed[i] = "Z"; // this means that there is no real value there
 	}
@@ -35,8 +45,11 @@ function canvasClicked(canvasNum) {
 		} else {
 			player = "O";
 		}
-		alert("Player " + player + " wins!!");
+		alert("Player " + player + " won!");
+	} else if (checkDraw()) {
+		alert("It's a draw!")
 	}
+
 	turn++;
 }
 
@@ -49,6 +62,20 @@ function updateSquaresPlayed(isXTurn, canvasNum) {
 		paintO(canvasNum);
 	}		
 }
+
+function paintX(canvasNum) {
+	c = document.getElementById("canvas"+canvasNum);
+	cxt = c.getContext("2d");
+	cxt.drawImage(xSymbol, 50, 50);
+}
+
+function paintO(canvasNum) {
+	c = document.getElementById("canvas"+canvasNum);
+	cxt = c.getContext("2d");
+	cxt.drawImage(ySymbol, 50, 50);
+}
+
+/*
 
 function paintX(canvasNum) {
 	c = document.getElementById("canvas"+canvasNum);
@@ -71,6 +98,20 @@ function paintO(canvasNum) {
 	cxt.arc(25, 25, 20, 0, Math.PI*2);
 	cxt.stroke();
 	cxt.closePath();
+}
+*/
+
+function checkDraw() {
+	var draw = true;
+	console.log(squaresPlayed.length);
+	for (var i = 0; i < squaresPlayed.length; i++) {
+		if (squaresPlayed[i] == "Z") {
+			draw = false;
+			break;
+		}
+	}
+	console.log(draw);
+	return draw;
 }
 
 function checkWin() {
@@ -95,7 +136,7 @@ function checkWin() {
 			break;
 		}
 	}
-
+	/*
 	if (!won) {
 		var empty = true;
 		for (var i = 0; i < squaresPlayed.length; i++) {
@@ -103,6 +144,6 @@ function checkWin() {
 
 			}
 		}
-	}
+	} */
 	return won;
 } 
